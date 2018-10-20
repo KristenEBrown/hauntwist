@@ -20,7 +20,12 @@ public class HallwayManager {
     }
 
     public HallwayTile getEnd(){
-        return hall.get(hall.size() - 1);
+        if (!(hall.isEmpty())){
+            return hall.get(hall.size() - 1);
+        }
+
+        return null;
+
     }
 
     public void setConnector(HallwayTile h){
