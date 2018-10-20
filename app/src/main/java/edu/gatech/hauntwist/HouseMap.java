@@ -140,31 +140,66 @@ public class HouseMap {
                     }
                 } else {
                     if (row == 0) {
-                        if (map[row + 1][col] == null && map[row][col + inc] == null) {
-                            //no rooms around it
-                        } else {
-                            //is a room around it
+                        if (map[row + 1][col] != null && map[row][col + inc] != null) {
+                            boolean end = false;
+                            if (map[row + 1][col] != null && ((RoomTile) map[row + 1][col]).getEntrance() == null) {
+                                end = true;
+                                ((RoomTile) map[row + 1][col]).setEntrance(h);
+                            }
+                            if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
+                                end = true;
+                                ((RoomTile) map[row][col + inc]).setEntrance(h);
+                            }
+                            if (end) {
+                                hallway.setConnector(new HallwayTile(row, (col + inc)));
+                                return hallway;
+                            }
                         }
                     } else if (row == (size - 1)) {
-                        if (map[row - 1][col] == null && map[row][col + inc] == null) {
-                            //no rooms around it
-                        } else {
-                            //is a romo aroun dit
+                        if (map[row - 1][col] != null && map[row][col + inc] != null) {
+                            boolean end = false;
+                            if (map[row - 1][col] != null && ((RoomTile) map[row - 1][col]).getEntrance() == null) {
+                                end = true;
+                                ((RoomTile) map[row - 1][col]).setEntrance(h);
+                            }
+                            if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
+                                end = true;
+                                ((RoomTile) map[row][col + inc]).setEntrance(h);
+                            }
+                            if (end) {
+                                hallway.setConnector(new HallwayTile(row, (col + inc)));
+                                return hallway;
+                            }
                         }
                     } else {
-                        if (map[row - 1][col] == null
-                                && map[row + 1][col] == null
-                                    && map[row][col + inc] == null) {
-                            //no rooms around it
-                        } else {
-                            //rooms around it
+                        if (map[row - 1][col] != null && map[row + 1][col] != null && map[row][col + inc] != null) {
+                            if (map[row - 1][col] != null && map[row][col + inc] != null) {
+                                boolean end = false;
+                                if (map[row - 1][col] != null && ((RoomTile) map[row - 1][col]).getEntrance() == null) {
+                                    end = true;
+                                    ((RoomTile) map[row - 1][col]).setEntrance(h);
+                                }
+                                if (map[row + 1][col] != null && ((RoomTile) map[row + 1][col]).getEntrance() == null) {
+                                    end = true;
+                                    ((RoomTile) map[row + 1][col]).setEntrance(h);
+                                }
+                                if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
+                                    end = true;
+                                    ((RoomTile) map[row][col + inc]).setEntrance(h);
+                                }
+                                if (end) {
+                                    hallway.setConnector(new HallwayTile(row, (col + inc)));
+                                    return hallway;
+                                }
+                            }
                         }
                     }
                 }
-            } else {
-                //return and if its a room check to make sure we add entrance if need be
+            } else{
+                return hallway;
             }
         }
+        return hallway;
     }
 
     public HallwayManager moveVertical(int row, int col) {
