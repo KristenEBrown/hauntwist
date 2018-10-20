@@ -1,10 +1,10 @@
 package edu.gatech.hauntwist;
 
 public abstract class MapTile {
-    MapTile up;
-    MapTile down;
-    MapTile left;
-    MapTile right;
+    public MapTile up;
+    public MapTile down;
+    public MapTile left;
+    public MapTile right;
 
     public MapTile() {
         this(null, null, null, null);
