@@ -48,10 +48,10 @@ public class HouseMap {
         HallwayTile h = this.getStart(0);
         int hallways = 1;
         while(hallways < size){
-            HallwayManager horzHallway = moveHorizontal(h);
+            HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
             h = getNextOpen(horzHallway);
             hallways++;
-            HallwayManager vertHallway = moveVertical(h);
+            HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
             h = getNextOpen(vertHallway);
             hallways++;
         }
