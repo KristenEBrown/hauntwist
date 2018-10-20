@@ -44,19 +44,7 @@ public class HouseMap {
     public void hallSet() {
         int row = roomList.get(0).getRow();
         int col = roomList.get(0).getCol();
-        if (moveUp(row, col)) {
-            col--;
-        } else if (moveDown(row, col)) {
-            col++;
-        } else if (moveLeft(row, col)) {
-            row--;
-        } else{
-            row++;
-        }
-        do {
-            map[row][col] = new HallwayTile();
-            if()
-        } while(map[row][col] ;
+
 
     }
 
