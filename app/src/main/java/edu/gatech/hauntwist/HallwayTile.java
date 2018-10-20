@@ -1,4 +1,9 @@
 package edu.gatech.hauntwist;
 
-public class HallwayTile {
+public class HallwayTile extends MapTile {
+    boolean containsEvent;
+    HallEvent event;
+
+
+
 }
