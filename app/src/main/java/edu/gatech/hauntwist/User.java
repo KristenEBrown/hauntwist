@@ -1,7 +1,7 @@
 package edu.gatech.hauntwist;
 
 import java.util.ArrayList;
-import java.util.Map;
+
 
 public class User {
 
@@ -12,6 +12,8 @@ public class User {
     private MapTile rightTile;
     private MapTile backTile;
 
+    private Direction dir;
+
     private String name;
 
     private ArrayList<RoomItem> items;
@@ -21,6 +23,7 @@ public class User {
         this.currentTile = current;
         this.name = name;
         this.items = new ArrayList<RoomItem>();
+        this.dir = Direction.N;
     }
 
 
@@ -81,6 +84,46 @@ public class User {
             // stubbed out
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    private int getForCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() - 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() + 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getForRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() + 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() - 1;
+        } else {
+            return this.currentTile.getRow();
+        }
+    }
+
+    private int getBackCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() + 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() - 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getBackRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() - 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() + 1;
+        } else {
+            return this.currentTile.getRow();
         }
     }
 
