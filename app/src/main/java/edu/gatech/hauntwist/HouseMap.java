@@ -12,12 +12,12 @@ public class HouseMap {
     List<HallwayManager> hallwayList;
 
     public HouseMap(){
-        this(10);
+        this(5);
     }
 
     public HouseMap(int n) {
-        map = new MapTile[n][n];
-        this.size = n;
+        this.size = 2*n;
+        map = new MapTile[size][size];
         rand = new Random();
         roomList = new ArrayList<>();
         hallwayList = new ArrayList<>();
@@ -28,7 +28,7 @@ public class HouseMap {
 
     public void roomSet() {
         int rooms = 0;
-        int roomLimit = size + 5;
+        int roomLimit = size + size/2;
         while (rooms < roomLimit) {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -68,16 +68,65 @@ public class HouseMap {
         if (col > (size/2)) {
             inc = -1;
         }
+        while (col < size && col >- 1) {
+            if (map[row][col] == null) {
+                HallwayTile h = new HallwayTile(row, col);
+                hallway.add(h);
+                if ((col + inc) > (size -1) || (col + inc) < 0) {
+                    if(row == 0) {
+                        if(map[row + 1][col] != null) {
+                            RoomTile r = (RoomTile) map[row+1][col]
+                            if (r.getEntrance() == null) {
+                                r.setEntrance(h);
+
+                                return hallway;
+                            }
+                        }
+                    } else if (row == (size -1)) {
+                        if (map[row - 1][col] == null) {
+                            //no rooms around it
+                        } else {
+                            //is a romo aroun dit
+                        }
+                    } else {
+                        if (map[row - 1][col] == null && map[row + 1][col] == null) {
+                            //no rooms around it
+                        } else {
+                            //rooms around it
+                        }
+                    }
+                } else {
+                    if(row == 0) {
+                        if(map[row + 1][col] == null && map[row][col+inc] == null) {
+                            //no rooms around it
+                        } else {
+                            //is a room around it
+                        }
+                    } else if (row == (size -1)) {
+                        if (map[row - 1][col] == null && map[row][col+inc] == null) {
+                            //no rooms around it
+                        } else {
+                            //is a romo aroun dit
+                        }
+                    } else {
+                        if (map[row - 1][col] == null && map[row + 1][col] == null && map[row][col+inc] == null) {
+                            //no rooms around it
+                        } else {
+                            //rooms around it
+                        }
+                }
+            }
+        }
+
         //null pointer exception below is possible needs to be fixed
-        while ((map[row][col + inc] == null && map[row - 1][col] == null
-                && map [row + 1][col] == null)&& (col+inc) < size) {
+        while (map[row][col + inc] == null && map[row - 1][col] == null
+                && map [row + 1][col] == null&& (col+inc) < size) {
             HallwayTile h = new HallwayTile(row, col + inc);
             map[row][col + inc] = h;
             hallway.add(h);
             col = col +inc;
         }
-        //if(col == size)
-
+        //if(col == size);
         return new HallwayManager();
     }
 
@@ -87,7 +136,7 @@ public class HouseMap {
         if (row > (size/2)) {
             inc = -1;
         }
-        //nullpointer exception possible below. Must be fixed
+        //null pointer exception possible below. Must be fixed
         while (map[row + inc][col] == null && map[row][col - 1] == null
                 && map [row][col + 1] == null) {
             HallwayTile h = new HallwayTile(row, col + inc);
