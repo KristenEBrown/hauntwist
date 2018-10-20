@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class HouseMap {
-    MapTile[][] map;
-    int size;
-    Random rand;
-    List<RoomTile> roomList;
-    List<HallwayManager> hallwayList;
+    private MapTile[][] map;
+    private int size;
+    private Random rand;
+    private List<RoomTile> roomList;
+    private List<HallwayManager> hallwayList;
 
     public HouseMap(){
         this(5);
@@ -47,14 +47,14 @@ public class HouseMap {
     public void hallSet(){
         HallwayTile h = this.getStart(0);
         int hallways = 1;
-        while(hallways < size){
+        //while(hallways < size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
             h = getNextOpen(horzHallway);
-            hallways++;
-            HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
-            h = getNextOpen(vertHallway);
-            hallways++;
-        }
+        //    hallways++;
+        //    HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
+        //    h = getNextOpen(vertHallway);
+        //    hallways++;
+        //}
 
 
     }
@@ -92,114 +92,44 @@ public class HouseMap {
         if (col > (size/2)) {
             inc = -1;
         }
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
         while (col < size && col >- 1) {
             if (map[row][col] == null) {
                 HallwayTile h = new HallwayTile(row, col);
                 hallway.add(h);
-                if ((col + inc) > (size - 1) || (col + inc) < 0) {
-                    if (row == 0) {
-                        if (map[row + 1][col] != null) {
-                            RoomTile r = (RoomTile) map[row + 1][col];
-                            if (r.getEntrance() == null) {
-                                r.setEntrance(h);
-                                hallway.setConnector(new HallwayTile(row, (col + inc)));
-                                return hallway;
-                            }
-                        }
-                    } else if (row == (size - 1)) {
-                        if (map[row - 1][col] != null) {
-                            RoomTile r = (RoomTile) map[row - 1][col];
-                            if (r.getEntrance() == null) {
-                                r.setEntrance(h);
-                                hallway.setConnector(new HallwayTile(row, (col + inc)));
-                                return hallway;
-                            }
-                        }
-                    } else {
-                        boolean end = false;
-                        if (map[row - 1][col] != null || map[row + 1][col] != null) {
-                            if (map[row - 1][col] != null) {
-                                RoomTile r = (RoomTile) map[row - 1][col];
-                                if (r.getEntrance() == null) {
-                                    r.setEntrance(h);
-                                    end = true;
-                                }
-                            }
-                            if (map[row + 1][col] != null) {
-                                RoomTile r = (RoomTile) map[row + 1][col];
-                                if (r.getEntrance() == null) {
-                                    r.setEntrance(h);
-                                    end = true;
-                                }
-                            }
-                        }
-                        if (end) {
-                            hallway.setConnector(new HallwayTile(row, (col + inc)));
-                            return hallway;
-                        }
-                    }
-                } else {
-                    if (row == 0) {
-                        if (map[row + 1][col] != null && map[row][col + inc] != null) {
-                            boolean end = false;
-                            if (map[row + 1][col] != null && ((RoomTile) map[row + 1][col]).getEntrance() == null) {
-                                end = true;
-                                ((RoomTile) map[row + 1][col]).setEntrance(h);
-                            }
-                            if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
-                                end = true;
-                                ((RoomTile) map[row][col + inc]).setEntrance(h);
-                            }
-                            if (end) {
-                                hallway.setConnector(new HallwayTile(row, (col + inc)));
-                                return hallway;
-                            }
-                        }
-                    } else if (row == (size - 1)) {
-                        if (map[row - 1][col] != null && map[row][col + inc] != null) {
-                            boolean end = false;
-                            if (map[row - 1][col] != null && ((RoomTile) map[row - 1][col]).getEntrance() == null) {
-                                end = true;
-                                ((RoomTile) map[row - 1][col]).setEntrance(h);
-                            }
-                            if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
-                                end = true;
-                                ((RoomTile) map[row][col + inc]).setEntrance(h);
-                            }
-                            if (end) {
-                                hallway.setConnector(new HallwayTile(row, (col + inc)));
-                                return hallway;
-                            }
-                        }
-                    } else {
-                        if (map[row - 1][col] != null && map[row + 1][col] != null && map[row][col + inc] != null) {
-                            if (map[row - 1][col] != null && map[row][col + inc] != null) {
-                                boolean end = false;
-                                if (map[row - 1][col] != null && ((RoomTile) map[row - 1][col]).getEntrance() == null) {
-                                    end = true;
-                                    ((RoomTile) map[row - 1][col]).setEntrance(h);
-                                }
-                                if (map[row + 1][col] != null && ((RoomTile) map[row + 1][col]).getEntrance() == null) {
-                                    end = true;
-                                    ((RoomTile) map[row + 1][col]).setEntrance(h);
-                                }
-                                if (map[row][col + inc] != null && ((RoomTile) map[row][col + inc]).getEntrance() == null) {
-                                    end = true;
-                                    ((RoomTile) map[row][col + inc]).setEntrance(h);
-                                }
-                                if (end) {
-                                    hallway.setConnector(new HallwayTile(row, (col + inc)));
-                                    return hallway;
-                                }
-                            }
-                        }
-                    }
+                map[row][col] = h;
+                if (row > 0) {
+                    a = check(row - 1, col, h);
                 }
-            } else{
-                return hallway;
+                if (row < (size - 1)) {
+                    b =check(row + 1, col, h);
+                }
+                if ((col + inc) < size && (col + inc) > -1) {
+                    c = check(row, col + inc, h);
+                }
+                if (a || b || c) {
+                    hallway.setConnector(new HallwayTile(row, (col + inc)));
+                    return hallway;
+                }
             }
         }
+        col = col + inc;
+        hallway.setConnector(new HallwayTile(row, col));
         return hallway;
+    }
+
+    public boolean check( int row, int col, HallwayTile h) {
+        if (map[row][col] instanceof RoomTile) {
+            RoomTile r = new RoomTile(row, col);
+            if (r.getEntrance() == null) {
+                r.setEntrance(h);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     public HallwayManager moveVertical(int row, int col) {
@@ -220,6 +150,10 @@ public class HouseMap {
         return hallway;
     }
 
+    public MapTile[][] getMap() {
+        return map;
+    }
+
 
     // move methods should return the updated row/col value, and store created hallways
     // in hallway objects. should store what one hallway tile points to right and
@@ -233,7 +167,7 @@ public class HouseMap {
             for(int j = 0; j < size; j++) {
                 if (map[i][j] != null) {
                     toRet += String.format("%-3s", map[i][j].toString());
-                } else {
+                } else{
                     toRet += String.format("%-3s", "•");
                 }
             }
