@@ -49,7 +49,9 @@ public class HouseMap {
         int col = roomList.get(0).getCol();
         int connectedRooms = 1;
         while (connectedRooms < size){
-            col = moveHorizontal(row, col);
+            HallwayManager horzHallway = moveHorizontal(row, col);
+            //HallwayManager vertHallway = moveVertical(horzHallway.getEnd());
+
             // update cols. Add hallway when run into a room (save to new
             // hallway object) if doesn't work, delete hallway(stored in
             // hallway manager object.
@@ -60,7 +62,7 @@ public class HouseMap {
         }
     }
 
-    public HallwayTile moveHorizontal(int row, int col) {
+    public HallwayManager moveHorizontal(int row, int col) {
         int inc = 1;
         if (col > (size/2)) {
             inc = -1;
@@ -71,7 +73,21 @@ public class HouseMap {
             col = col +inc;
         }
 
-        return (HallwayTile)map[row][col];
+        return new HallwayManager()];
+    }
+
+    public HallwayManager moveVertical(int row, int col) {
+        int inc = 1;
+        if (row > (size/2)) {
+            inc = -1;
+        }
+        while (map[row + inc][col] == null && map[row][col - 1] == null
+                && map [row][col + 1] == null) {
+            map[row][col + inc] = new HallwayTile(row, col + inc);
+            col = col +inc;
+        }
+
+        return new HallwayManager()];
     }
 
 
