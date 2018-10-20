@@ -35,19 +35,35 @@ public class User {
 
     }
 
+    public void turnAround() {
+        if (dir == Direction.N) {
+            this.dir = Direction.S;
+        } else if (dir == Direction.S) {
+            this.dir = Direction.N;
+        } else if (dir == Direction.E) {
+            this.dir = Direction.W;
+        } else if (dir == Direction.W) {
+            this.dir = Direction.E;
+        }
+    }
+
     public boolean canGoForward() {
-        // implement checking if can go forward
+        if (forwardTile != null) {
+            return true;
+        }
         return false;
     }
 
     public boolean canGoLeft() {
-        // implement checking if can go forward
-        return false;
+        return leftTile != null;
     }
 
     public boolean canGoRight() {
-        // implement checking if can go forward
-        return false;
+        return rightTile != null;
+    }
+
+    public boolean canGoBack() {
+        return backTile != null;
     }
 
     public void goForward() {
@@ -71,18 +87,31 @@ public class User {
         }
     }
 
+    public void goBack() {
+        if (canGoBack()) {
+            this.currentTile = this.backTile;
+            updateTiles(currentTile);
+        }
+    }
+
     public MapTile tileUpdater(MapTile currentTile, String dir) {
         if (dir == "right") {
-            tileUpdaterHelper(currentTile, currentTile.getRow(), currentTile.getCol() + 1);
+            return tileUpdaterHelper(currentTile, getRightRow(), getRightCol());
+        } else if (dir == "left") {
+            return tileUpdaterHelper(currentTile, getLeftRow(), getLeftCol());
+        } else if (dir == "forward") {
+            return tileUpdaterHelper(currentTile, getForRow(), getForCol());
+        } else if (dir == "back") {
+            return tileUpdaterHelper(currentTile, getBackRow(), getBackCol());
         }
         return null;
     }
 
     private MapTile tileUpdaterHelper(MapTile currentTile, int newRow, int newCol) {
+        MapTile[][] tempMap = HouseMap.getMap();
         try {
-            return null;
-            // stubbed out
-        } catch (Exception e) {
+            return tempMap[newRow][newCol];
+        } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }
     }
@@ -118,6 +147,46 @@ public class User {
     }
 
     private int getBackRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() - 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() + 1;
+        } else {
+            return this.currentTile.getRow();
+        }
+    }
+
+    private int getRightCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() + 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() - 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getRightRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() + 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() - 1;
+        } else {
+            return this.currentTile.getRow();
+        }
+    }
+
+    private int getLeftCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() - 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() + 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getLeftRow() {
         if (dir == Direction.E) {
             return this.currentTile.getRow() - 1;
         } else if (dir == Direction.W) {
