@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class HouseMap {
-    MapTile[][] map;
-    int size;
-    Random rand;
-    List<RoomTile> roomList;
-    List<HallwayManager> hallwayList;
+    private MapTile[][] map;
+    private int size;
+    private Random rand;
+    private List<RoomTile> roomList;
+    private List<HallwayManager> hallwayList;
 
     public HouseMap(){
         this(5);
@@ -115,7 +115,8 @@ public class HouseMap {
                 }
             }
         }
-        hallway.setConnector(new HallwayTile(row, (col + inc)));
+        col = col + inc;
+        hallway.setConnector(new HallwayTile(row, col));
         return hallway;
     }
 
@@ -149,6 +150,10 @@ public class HouseMap {
         return hallway;
     }
 
+    public MapTile[][] getMap() {
+        return map;
+    }
+
 
     // move methods should return the updated row/col value, and store created hallways
     // in hallway objects. should store what one hallway tile points to right and
@@ -162,7 +167,7 @@ public class HouseMap {
             for(int j = 0; j < size; j++) {
                 if (map[i][j] != null) {
                     toRet += String.format("%-3s", map[i][j].toString());
-                } else {
+                } else{
                     toRet += String.format("%-3s", "•");
                 }
             }
