@@ -117,11 +117,7 @@ public class HouseMap {
             }
             col = col + inc;
         }
-<<<<<<< HEAD
-        hallway.setConnector(new HallwayTile(row, (col + inc)));
-=======
         hallway.setConnector(new HallwayTile(row, col));
->>>>>>> 7aa85172263b04e8345213b526e1f2fba32dc28e
         return hallway;
     }
 
