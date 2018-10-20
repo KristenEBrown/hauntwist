@@ -47,14 +47,14 @@ public class HouseMap {
     public void hallSet(){
         HallwayTile h = this.getStart(0);
         int hallways = 1;
-        while(hallways < size){
+        //while(hallways < size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
             h = getNextOpen(horzHallway);
-            hallways++;
-            HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
-            h = getNextOpen(vertHallway);
-            hallways++;
-        }
+        //    hallways++;
+        //    HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
+        //    h = getNextOpen(vertHallway);
+        //    hallways++;
+        //}
 
 
     }
