@@ -76,7 +76,7 @@ public class HouseMap {
             hallway.add(h);
             col = col +inc;
         }
-        if(col == size)
+        //if(col == size)
 
         return new HallwayManager();
     }
