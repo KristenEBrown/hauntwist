@@ -217,7 +217,7 @@ public class HouseMap {
             col = col +inc;
         }
 
-        return new HallwayManager();
+        return hallway;
     }
 
 
