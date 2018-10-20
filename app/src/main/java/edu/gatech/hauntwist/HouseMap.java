@@ -48,11 +48,13 @@ public class HouseMap {
     public void hallSet(){
         HallwayTile h = this.getStart(0);
         int hallways = 1;
-        while(hallways < size){
+        while(hallways <= size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
+            hallwayList.add(horzHallway);
             h = getNextOpen(horzHallway);
             hallways++;
             HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
+            hallwayList.add(vertHallway);
             h = getNextOpen(vertHallway);
             hallways++;
         }
@@ -67,7 +69,7 @@ public class HouseMap {
             return new HallwayTile(row, col + 1);
         } else if (col - 1 >= 0 && map[row][col - 1] == null) {
             return new HallwayTile(row, col - 1);
-        } else if (row + 1 >= 0 && map[row + 1][col] == null) {
+        } else if (row + 1 < size && map[row + 1][col] == null) {
             return new HallwayTile(row + 1, col);
         } else if (row - 1 >= 0 && map[row - 1][col] == null) {
             return new HallwayTile(row - 1, col);
@@ -80,8 +82,12 @@ public class HouseMap {
         int col = hall.getConnector().getCol();
         if (col < 0 || col > size - 1
                 || row < 0 || row > size - 1
-                || map[row][col] != null){
-            return hall.getEnd();
+                    || map[row][col] != null){
+            if (hall.getEnd() != null) {
+                return hall.getEnd();
+            } else {
+                return getNextOpen(hallwayList.get(hallwayList.lastIndexOf(hall) - 1));
+            }
         }
         return hall.getConnector();
     }
@@ -96,8 +102,9 @@ public class HouseMap {
         boolean a = false;
         boolean b = false;
         boolean c = false;
+        //&& row < size && row >- 1
         while (col < size && col >- 1) {
-            if (map[row][col] == null) {
+            if (!(map[row][col] instanceof RoomTile)) {
                 HallwayTile h = new HallwayTile(row, col);
                 hallway.add(h);
                 map[row][col] = h;

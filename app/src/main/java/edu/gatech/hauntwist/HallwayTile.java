@@ -18,7 +18,7 @@ public class HallwayTile extends MapTile {
 
     @Override
     public String toString(){
-        return "+";
+        return "#";
     }
 
 

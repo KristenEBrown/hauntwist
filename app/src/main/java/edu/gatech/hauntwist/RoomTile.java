@@ -29,6 +29,9 @@ public class RoomTile extends MapTile{
 
     @Override
     public String toString(){
+        if (this.getEntrance() == null) {
+            return "*";
+        }
         return "@";
     }
 
