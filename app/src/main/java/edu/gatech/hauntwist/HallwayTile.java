@@ -4,6 +4,10 @@ public class HallwayTile extends MapTile {
     boolean containsEvent;
     HallEvent event;
 
+    public HallwayTile() {
+
+    }
+
 
 
 }
