@@ -69,7 +69,7 @@ public class HouseMap {
             inc = -1;
         }
         //null pointer exception below is possible needs to be fixed
-        while (map[row][col + inc] == null && map[row - 1][col] == null
+        while ((map[row][col + inc] == null && map[row - 1][col] == null
                 && map [row + 1][col] == null)&& (col+inc) < size) {
             HallwayTile h = new HallwayTile(row, col + inc);
             map[row][col + inc] = h;
@@ -96,7 +96,7 @@ public class HouseMap {
             col = col +inc;
         }
 
-        return new HallwayManager()];
+        return new HallwayManager();
     }
 
 
