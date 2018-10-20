@@ -167,7 +167,7 @@ public class HouseMap {
         return hallway;
     }
 
-    public MapTile getMap() {
+    public MapTile[][] getMap() {
         return map;
     }
 
