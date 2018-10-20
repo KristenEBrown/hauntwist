@@ -22,6 +22,7 @@ public class HouseMap {
         roomList = new ArrayList<>();
         hallwayList = new ArrayList<>();
         roomSet();
+        hallSet();
 
     }
     //some sort of creation algo
@@ -47,14 +48,14 @@ public class HouseMap {
     public void hallSet(){
         HallwayTile h = this.getStart(0);
         int hallways = 1;
-        //while(hallways < size){
+        while(hallways < size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
             h = getNextOpen(horzHallway);
-        //    hallways++;
-        //    HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
-        //    h = getNextOpen(vertHallway);
-        //    hallways++;
-        //}
+            hallways++;
+            HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
+            h = getNextOpen(vertHallway);
+            hallways++;
+        }
 
 
     }
@@ -77,8 +78,8 @@ public class HouseMap {
     public HallwayTile getNextOpen(HallwayManager hall){
         int row = hall.getConnector().getRow();
         int col = hall.getConnector().getCol();
-        if (col < 0 || col > size
-                || row < 0 || row > size
+        if (col < 0 || col > size - 1
+                || row < 0 || row > size - 1
                 || map[row][col] != null){
             return hall.getEnd();
         }
@@ -104,7 +105,7 @@ public class HouseMap {
                     a = check(row - 1, col, h);
                 }
                 if (row < (size - 1)) {
-                    b =check(row + 1, col, h);
+                    b = check(row + 1, col, h);
                 }
                 if ((col + inc) < size && (col + inc) > -1) {
                     c = check(row, col + inc, h);
@@ -114,8 +115,8 @@ public class HouseMap {
                     return hallway;
                 }
             }
+            col = col + inc;
         }
-        col = col + inc;
         hallway.setConnector(new HallwayTile(row, col));
         return hallway;
     }
