@@ -8,7 +8,7 @@
     tools:context=".SplashActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/nameEditText"
         android:layout_width="300sp"
         android:layout_height="60sp"
         android:layout_marginBottom="8dp"
@@ -24,6 +24,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textAllCaps="false"
+        android:textColor="#c5ffffff"
         android:textColorHint="#c5ffffff"
         android:textSize="20sp"
         android:textStyle="italic"
@@ -35,7 +36,7 @@
         app:layout_constraintVertical_bias="0.397" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/entryBttn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,5 +51,5 @@
         android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 </android.support.constraint.ConstraintLayout>
