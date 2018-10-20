@@ -44,23 +44,47 @@ public class HouseMap {
         }
     }
 
-    public void hallSet() {
-        int row = roomList.get(0).getRow();
-        int col = roomList.get(0).getCol();
-        int connectedRooms = 1;
-        while (connectedRooms < size){
-            HallwayManager horzHallway = moveHorizontal(row, col);
-            //HallwayManager vertHallway = moveVertical(horzHallway.getEnd());
-
-            // update cols. Add hallway when run into a room (save to new
-            // hallway object) if doesn't work, delete hallway(stored in
-            // hallway manager object.
-            // then move on to moving down (either from current or update
-            // location, and update rows. if still doesn't work,
-            // move to next room in roomList
-            // note: roomManager object is useless.
+    public void hallSet(){
+        HallwayTile h = this.getStart(0);
+        int hallways = 1;
+        while(hallways < size){
+            HallwayManager horzHallway = moveHorizontal(h);
+            h = getNextOpen(horzHallway);
+            hallways++;
+            HallwayManager vertHallway = moveVertical(h);
+            h = getNextOpen(vertHallway);
+            hallways++;
         }
+
+
     }
+
+    public HallwayTile getStart(int index) {
+        int col = roomList.get(index).getCol();
+        int row = roomList.get(index).getRow();
+        if (col + 1 < size && map[row][col + 1] == null) {
+            return new HallwayTile(row, col + 1);
+        } else if (col - 1 >= 0 && map[row][col - 1] == null) {
+            return new HallwayTile(row, col - 1);
+        } else if (row + 1 >= 0 && map[row + 1][col] == null) {
+            return new HallwayTile(row + 1, col);
+        } else if (row - 1 >= 0 && map[row - 1][col] == null) {
+            return new HallwayTile(row - 1, col);
+        }
+        return getStart(index + 1);
+    }
+
+    public HallwayTile getNextOpen(HallwayManager hall){
+        int row = hall.getConnector().getRow();
+        int col = hall.getConnector().getCol();
+        if (col < 0 || col > size
+                || row < 0 || row > size
+                || map[row][col] != null){
+            return hall.getEnd();
+        }
+        return hall.getConnector();
+    }
+
 
     public HallwayManager moveHorizontal(int row, int col) {
         int inc = 1;
@@ -128,7 +152,9 @@ public class HouseMap {
                             //is a romo aroun dit
                         }
                     } else {
-                        if (map[row - 1][col] == null && map[row + 1][col] == null && map[row][col + inc] == null) {
+                        if (map[row - 1][col] == null
+                                && map[row + 1][col] == null
+                                    && map[row][col + inc] == null) {
                             //no rooms around it
                         } else {
                             //rooms around it
