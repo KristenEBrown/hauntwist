@@ -1,9 +1,9 @@
 package edu.gatech.hauntwist;
 public enum RoomItem {
-    DEADBODY(
+    PHOTOGRAPH();
 
-
-
+    String name;
+    String clue;
     public RoomItem(String name, String clue) {
         this.name = name;
         this.clue = clue;
