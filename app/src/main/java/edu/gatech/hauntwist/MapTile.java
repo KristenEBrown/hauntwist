@@ -1,22 +1,21 @@
 package edu.gatech.hauntwist;
 
 public abstract class MapTile {
-    public MapTile up;
-    public MapTile down;
-    public MapTile left;
-    public MapTile right;
+    private int row;
+    private int col;
 
-    public MapTile() {
-        this(null, null, null, null);
+    public MapTile(int row, int col) {
+        this.row = row;
+        this.col = col;
+
     }
 
-    public MapTile(MapTile up, MapTile down,
-                   MapTile left, MapTile right) {
-        this.up = up;
-        this.down = down;
-        this.left = left;
-        this.right = right;
+    public int getRow(){
+        return this.row;
+    }
 
+    public int getCol(){
+        return this.col;
     }
 
 }

@@ -3,13 +3,10 @@ package edu.gatech.hauntwist;
 public class RoomTile extends MapTile{
     private boolean containsItem;
     private RoomItem item;
-    private int row;
-    private int col;
     private HallwayTile entrance;
 
     public RoomTile(int row, int col) {
-        this.row = row;
-        this.col = col;
+        super(row, col);
         entrance = null;
 
     }
@@ -22,12 +19,12 @@ public class RoomTile extends MapTile{
         return entrance;
     }
 
-    public int getCol() {
-        return col;
+    public int getRow() {
+        return super.getRow();
     }
 
-    public int getRow() {
-        return row;
+    public int getcol() {
+        return super.getCol();
     }
 
     @Override

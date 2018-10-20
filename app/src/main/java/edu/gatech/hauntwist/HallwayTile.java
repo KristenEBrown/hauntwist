@@ -3,20 +3,17 @@ package edu.gatech.hauntwist;
 public class HallwayTile extends MapTile {
     private boolean containsEvent;
     private HallEvent event;
-    private int row;
-    private int col;
 
     public HallwayTile(int row, int col) {
-        this.row = row;
-        this.col = col;
+        super(row, col);
     }
 
     public int getRow() {
-        return row;
+        return super.getRow();
     }
 
     public int getcol() {
-        return col;
+        return super.getCol();
     }
 
     @Override
