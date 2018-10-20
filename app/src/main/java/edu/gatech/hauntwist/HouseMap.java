@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class HouseMap {
-    MapTile[][] map;
-    int size;
-    Random rand;
-    List<RoomTile> roomList;
-    List<HallwayManager> hallwayList;
+    private MapTile[][] map;
+    private int size;
+    private Random rand;
+    private List<RoomTile> roomList;
+    private List<HallwayManager> hallwayList;
 
     public HouseMap(){
         this(5);
@@ -165,6 +165,10 @@ public class HouseMap {
         }
         hallway.setConnector(new HallwayTile(row, col));
         return hallway;
+    }
+
+    public MapTile getMap() {
+        return map;
     }
 
 
