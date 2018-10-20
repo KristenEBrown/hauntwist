@@ -23,7 +23,7 @@ public class RoomTile extends MapTile{
         return super.getRow();
     }
 
-    public int getcol() {
+    public int getCol() {
         return super.getCol();
     }
 
