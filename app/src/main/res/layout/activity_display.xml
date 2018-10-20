@@ -77,5 +77,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/forwardBttn"
-        app:srcCompat="@drawable/pixelatedRoom" />
+        app:srcCompat="@drawable/pixelatedroom" />
 </android.support.constraint.ConstraintLayout>
