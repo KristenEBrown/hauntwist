@@ -12,7 +12,7 @@ public class HallwayTile extends MapTile {
         return super.getRow();
     }
 
-    public int getcol() {
+    public int getCol() {
         return super.getCol();
     }
 

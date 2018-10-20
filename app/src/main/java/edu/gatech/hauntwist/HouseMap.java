@@ -73,7 +73,7 @@ public class HouseMap {
             col = col +inc;
         }
 
-        return new HallwayManager()];
+        return new HallwayManager();
     }
 
     public HallwayManager moveVertical(int row, int col) {
