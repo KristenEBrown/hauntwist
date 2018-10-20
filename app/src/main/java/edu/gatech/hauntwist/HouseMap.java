@@ -12,12 +12,12 @@ public class HouseMap {
     List<HallwayManager> hallwayList;
 
     public HouseMap(){
-        this(10);
+        this(5);
     }
 
     public HouseMap(int n) {
-        map = new MapTile[n][n];
-        this.size = n;
+        this.size = 2*n;
+        map = new MapTile[size][size];
         rand = new Random();
         roomList = new ArrayList<>();
         hallwayList = new ArrayList<>();
@@ -28,7 +28,7 @@ public class HouseMap {
 
     public void roomSet() {
         int rooms = 0;
-        int roomLimit = size + 5;
+        int roomLimit = size + size/2;
         while (rooms < roomLimit) {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -118,6 +118,16 @@ public class HouseMap {
             }
         }
 
+        //null pointer exception below is possible needs to be fixed
+        while (map[row][col + inc] == null && map[row - 1][col] == null
+                && map [row + 1][col] == null&& (col+inc) < size) {
+            HallwayTile h = new HallwayTile(row, col + inc);
+            map[row][col + inc] = h;
+            hallway.add(h);
+            col = col +inc;
+        }
+        //if(col == size);
+        return new HallwayManager();
     }
 
     public HallwayManager moveVertical(int row, int col) {
@@ -126,7 +136,7 @@ public class HouseMap {
         if (row > (size/2)) {
             inc = -1;
         }
-        //nullpointer exception possible below. Must be fixed
+        //null pointer exception possible below. Must be fixed
         while (map[row + inc][col] == null && map[row][col - 1] == null
                 && map [row][col + 1] == null) {
             HallwayTile h = new HallwayTile(row, col + inc);
@@ -135,7 +145,7 @@ public class HouseMap {
             col = col +inc;
         }
 
-        return new HallwayManager()];
+        return new HallwayManager();
     }
 
 
