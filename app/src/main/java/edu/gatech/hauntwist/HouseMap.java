@@ -90,6 +90,7 @@ public class HouseMap {
         return new HallwayManager()];
     }
 
+
     // move methods should return the updated row/col value, and store created hallways
     // in hallway objects. should store what one hallway tile points to right and
     // left(what if hallways intersect). should also fix hallway entryway pointers.
