@@ -64,26 +64,35 @@ public class HouseMap {
 
     public HallwayManager moveHorizontal(int row, int col) {
         int inc = 1;
+        HallwayManager hallway = new HallwayManager();
         if (col > (size/2)) {
             inc = -1;
         }
+        //null pointer exception below is possible needs to be fixed
         while (map[row][col + inc] == null && map[row - 1][col] == null
-                && map [row + 1][col] == null) {
-            map[row][col + inc] = new HallwayTile(row, col + inc);
+                && map [row + 1][col] == null)&& (col+inc) < size) {
+            HallwayTile h = new HallwayTile(row, col + inc);
+            map[row][col + inc] = h;
+            hallway.add(h);
             col = col +inc;
         }
+        if(col == size)
 
-        return new HallwayManager()];
+        return new HallwayManager();
     }
 
     public HallwayManager moveVertical(int row, int col) {
         int inc = 1;
+        HallwayManager hallway = new HallwayManager();
         if (row > (size/2)) {
             inc = -1;
         }
+        //nullpointer exception possible below. Must be fixed
         while (map[row + inc][col] == null && map[row][col - 1] == null
                 && map [row][col + 1] == null) {
-            map[row][col + inc] = new HallwayTile(row, col + inc);
+            HallwayTile h = new HallwayTile(row, col + inc);
+            map[row][col + inc] = h;
+            hallway.add(h);
             col = col +inc;
         }
 
