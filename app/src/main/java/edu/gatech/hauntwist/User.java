@@ -79,6 +79,7 @@ public class User {
     }
 
     private MapTile tileUpdaterHelper(MapTile currentTile, int newRow, int newCol) {
+        MapTile[][] tempMap = HouseMap.getMap();
         try {
             return null;
             // stubbed out
