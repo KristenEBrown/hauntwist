@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class HouseMap {
-    private MapTile[][] map;
-    private int size;
-    private Random rand;
-    private List<RoomTile> roomList;
-    private List<HallwayManager> hallwayList;
+    MapTile[][] map;
+    int size;
+    Random rand;
+    List<RoomTile> roomList;
+    List<HallwayManager> hallwayList;
 
     public HouseMap(){
         this(5);
@@ -22,6 +22,7 @@ public class HouseMap {
         roomList = new ArrayList<>();
         hallwayList = new ArrayList<>();
         roomSet();
+        hallSet();
 
     }
     //some sort of creation algo
@@ -47,14 +48,14 @@ public class HouseMap {
     public void hallSet(){
         HallwayTile h = this.getStart(0);
         int hallways = 1;
-        //while(hallways < size){
+        while(hallways < size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
             h = getNextOpen(horzHallway);
-        //    hallways++;
-        //    HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
-        //    h = getNextOpen(vertHallway);
-        //    hallways++;
-        //}
+            hallways++;
+            HallwayManager vertHallway = moveVertical(h.getRow(), h.getCol());
+            h = getNextOpen(vertHallway);
+            hallways++;
+        }
 
 
     }
@@ -77,8 +78,8 @@ public class HouseMap {
     public HallwayTile getNextOpen(HallwayManager hall){
         int row = hall.getConnector().getRow();
         int col = hall.getConnector().getCol();
-        if (col < 0 || col > size
-                || row < 0 || row > size
+        if (col < 0 || col > size - 1
+                || row < 0 || row > size - 1
                 || map[row][col] != null){
             return hall.getEnd();
         }
@@ -104,7 +105,7 @@ public class HouseMap {
                     a = check(row - 1, col, h);
                 }
                 if (row < (size - 1)) {
-                    b =check(row + 1, col, h);
+                    b = check(row + 1, col, h);
                 }
                 if ((col + inc) < size && (col + inc) > -1) {
                     c = check(row, col + inc, h);
@@ -114,15 +115,15 @@ public class HouseMap {
                     return hallway;
                 }
             }
+            col = col + inc;
         }
-        col = col + inc;
         hallway.setConnector(new HallwayTile(row, col));
         return hallway;
     }
 
     public boolean check( int row, int col, HallwayTile h) {
         if (map[row][col] instanceof RoomTile) {
-            RoomTile r = new RoomTile(row, col);
+            RoomTile r = (RoomTile)map[row][col];
             if (r.getEntrance() == null) {
                 r.setEntrance(h);
                 return true;
@@ -138,20 +139,32 @@ public class HouseMap {
         if (row > (size/2)) {
             inc = -1;
         }
-        //null pointer exception possible below. Must be fixed
-        while (map[row + inc][col] == null && map[row][col - 1] == null
-                && map [row][col + 1] == null) {
-            HallwayTile h = new HallwayTile(row, col + inc);
-            map[row][col + inc] = h;
-            hallway.add(h);
-            col = col +inc;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        while (row < size && row >- 1) {
+            if (map[row][col] == null) {
+                HallwayTile h = new HallwayTile(row, col);
+                hallway.add(h);
+                map[row][col] = h;
+                if (col > 0) {
+                    a = check(row, col - 1, h);
+                }
+                if (col < (size - 1)) {
+                    b =check(row, col + 1, h);
+                }
+                if ((row + inc) < size && (row + inc) > -1) {
+                    c = check(row + inc, col, h);
+                }
+                if (a || b || c) {
+                    hallway.setConnector(new HallwayTile(row + inc, col));
+                    return hallway;
+                }
+            }
+            row = row + inc;
         }
-
+        hallway.setConnector(new HallwayTile(row, col));
         return hallway;
-    }
-
-    public MapTile[][] getMap() {
-        return map;
     }
 
 
@@ -167,7 +180,7 @@ public class HouseMap {
             for(int j = 0; j < size; j++) {
                 if (map[i][j] != null) {
                     toRet += String.format("%-3s", map[i][j].toString());
-                } else{
+                } else {
                     toRet += String.format("%-3s", "•");
                 }
             }
