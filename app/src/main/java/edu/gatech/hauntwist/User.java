@@ -127,5 +127,45 @@ public class User {
         }
     }
 
+    private int getRightCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() + 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() - 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getRightRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() + 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() - 1;
+        } else {
+            return this.currentTile.getRow();
+        }
+    }
+
+    private int getLeftCol() {
+        if (dir == Direction.N) {
+            return this.currentTile.getCol() - 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getCol() + 1;
+        } else {
+            return this.currentTile.getCol();
+        }
+    }
+
+    private int getLeftRow() {
+        if (dir == Direction.E) {
+            return this.currentTile.getRow() - 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getRow() + 1;
+        } else {
+            return this.currentTile.getRow();
+        }
+    }
+
 
 }
