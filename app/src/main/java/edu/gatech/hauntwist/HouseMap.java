@@ -42,7 +42,7 @@ public class HouseMap {
         for(int i = 0; i < hallwayList.size(); i++) {
             if (i < hallVals.length) {
                 hallwayList.get(i).get(rand.nextInt(
-                        hallwayList.get(i).size())).sethasEvent(true);
+                        hallwayList.get(i).size())).setHasEvent(true);
             }
         }
 
