@@ -14,6 +14,7 @@ public class HouseMap {
     private Random rand;
     private List<RoomTile> roomList;
     private List<HallwayManager> hallwayList;
+    private MapTile userPos;
 
     public HouseMap(){
         this(5);
@@ -223,6 +224,10 @@ public class HouseMap {
         return this.roomList;
     }
 
+    public void setUserPos(MapTile m) {
+        this.userPos = m;
+    }
+
 
     // move methods should return the updated row/col value, and store created hallways
     // in hallway objects. should store what one hallway tile points to right and
@@ -234,7 +239,10 @@ public class HouseMap {
         String toRet = "";
         for(int i = 0; i < size; i++) {
             for(int j = 0; j < size; j++) {
-                if (map[i][j] != null) {
+                if (map[i][j] == userPos) {
+                    toRet += String.format("%-3s", "x");
+                }
+                else if (map[i][j] != null) {
                     toRet += String.format("%-3s", map[i][j].toString());
                 } else {
                     toRet += String.format("%-3s", " ");

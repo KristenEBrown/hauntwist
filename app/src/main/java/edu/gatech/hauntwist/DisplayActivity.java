@@ -20,6 +20,7 @@ public class DisplayActivity extends AppCompatActivity {
 
     private View textBackground;
     private TextView msgText;
+    private TextView mapText;
 
     private ImageView display;
 
@@ -66,8 +67,11 @@ public class DisplayActivity extends AppCompatActivity {
         msgText = findViewById(R.id.messageText);
 
         display = findViewById(R.id.displayView);
+        mapText = findViewById(R.id.mapView);
 
-
+        HouseMap map = HouseMap.getTheMap();
+        map.setUserPos(user.getCurrentTile());
+        mapText.setText(map.toString());
 
 
         forwardButton.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +143,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
 
         msgText.setText(newMessage);
+        HouseMap map = HouseMap.getTheMap();
+        map.setUserPos(user.getCurrentTile());
+        mapText.setText(map.toString());
 
         if (user.hasEvent()) {
             final HallEvent event = user.getEvent();
