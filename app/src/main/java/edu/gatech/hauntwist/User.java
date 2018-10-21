@@ -38,6 +38,14 @@ public class User {
         updateTiles(current);
     }
 
+    public ArrayList<HallEvent> getEvents() {
+        return eventList;
+    }
+
+    public ArrayList<RoomItem> getItems() {
+        return itemList;
+    }
+
     public static void setCurrentUser(User newUser) {
         currentUser = newUser;
     }

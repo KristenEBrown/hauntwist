@@ -68,11 +68,6 @@ public class DisplayActivity extends AppCompatActivity {
 
         display = findViewById(R.id.displayView);
 
-<<<<<<< HEAD
-        display
-=======
->>>>>>> b8ebbbe9d009198ee0aa6c388bb3088baaa06567
-
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,5 +136,41 @@ public class DisplayActivity extends AppCompatActivity {
         forwardButton.setEnabled(user.canGoForward());
         leftButton.setEnabled(user.canGoLeft());
         rightButton.setEnabled(user.canGoRight());
+        updateUser();
+    }
+
+    public void updateUser() {
+        if(User.getCurrentUser().getEvents().size() == 3 && User.getCurrentUser().getItems().size() == 2) {
+            msgText.setText("You suddenly start to piece information together. You are the ghost " +
+                    "in the house! You must have been murdered, which is why your body is in the hall. " +
+                    "Your friends did not acknowledge you and you could not see your reflection in the mirror, " +
+                    "because of this. This would explain the text from Tim’s mom as well, you are the one Tim has lost! " +
+                    "Thinking of the picture of your friends you realize you must have been murdered during your Fall Break trip. " +
+                    "So who killed you and for what reason?");
+        }
+
+        if(User.getCurrentUser().getEvents().size() == 5 && User.getCurrentUser().getItems().size() == 5) {
+            msgText.setText("All of the clues make sense now! Madeline was in love with you the whole " +
+                    "time and must have known that you loved Norris. She tried to kill Norris with " +
+                    "cyanide, but accidentally killed you instead! Oh no! In the love letter, " +
+                    "Madeline said she wanted to avenge your death, which means she must still be " +
+                    "planning to kill Norris. I must warn him before!");
+        }
+
+        if(User.getCurrentUser().getEvents().size() == 7 && User.getCurrentUser().getItems().size() == 7) {
+            end();
+        }
+
+    }
+
+    public void end() {
+        msgText.setText("You were, unfortunately, unable to save Norris. Madeline succeeded in her goal, but with a consequence of losing the person she loved.");
+        display.setImageResource(R.drawable.over);
+        forwardButton.setEnabled(false);
+        leftButton.setEnabled(false);
+        rightButton.setEnabled(false);
+        turnButton.setEnabled(false);
+        option1.setEnabled(false);
+        option2.setEnabled(false);
     }
 }
