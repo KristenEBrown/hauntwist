@@ -213,17 +213,20 @@ public class DisplayActivity extends AppCompatActivity {
         }
 
         retStr += "You can go ";
+        boolean comma = false;
         if (user.canGoLeft()) {
-            retStr += "to the left ";
+            retStr += "to the left";
+            comma = true;
         }
         if (user.canGoRight()) {
-            retStr += "to the right ";
+            if (comma) { retStr += ", "; }
+            retStr += "to the right";
         }
         if (user.canGoForward()) {
-            retStr += "forward. ";
+            if (comma) { retStr += ", "; }
+            retStr += "forward";
         }
-
-        return retStr;
+        return retStr += ".";
 
 
 
