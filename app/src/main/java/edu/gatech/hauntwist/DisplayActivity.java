@@ -169,6 +169,8 @@ public class DisplayActivity extends AppCompatActivity {
             });
         }
 
+        //testing
+
         if (user.getCurrentTile() instanceof RoomTile){
             if (((RoomTile)user.getCurrentTile()).getType() == 0){
                 display.setImageResource(R.drawable.room1);
