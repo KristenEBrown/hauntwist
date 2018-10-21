@@ -58,6 +58,8 @@ public class DisplayActivity extends AppCompatActivity {
 
         display = findViewById(R.id.displayView);
 
+        display
+
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +87,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void forward() {
-        Log.d("MOVEMENT", "Can go forward: "+user.canGoForward());
+        Log.d("MOVEMENT", "Can go forward: "+ user.canGoForward());
         if (user.canGoForward()) {
             user.goForward();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
@@ -94,7 +96,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void left() {
-        Log.d("MOVEMENT", "Can go left: "+user.canGoLeft());
+        Log.d("MOVEMENT", "Can go left: "+ user.canGoLeft());
         if (user.canGoLeft()) {
             user.goLeft();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
