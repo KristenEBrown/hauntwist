@@ -1,6 +1,6 @@
 package edu.gatech.hauntwist;
 public enum HallEvent {
-
+    TALKING("","","","","");
 
     private String name;
     private String option0;
@@ -10,31 +10,32 @@ public enum HallEvent {
     private int choice;
 
 
-    public HallEvent(String name, String options0, String option1, String outcome0, String outcome1){
+    HallEvent(String name, String options0, String option1, String outcome0, String outcome1){
         this.name = name;
-        this.optionA = options0;
-        this.optionB = option1;
-        this.outcomeA = outcome0;
-        this.outcomeB = outcome1;
+        this.option0 = options0;
+        this.option1 = option1;
+        this.outcome0 = outcome0;
+        this.outcome1 = outcome1;
         choice = 0;
     }
 
-    public setChoice(int choice) {
+    public void setChoice(int choice) {
         this.choice = choice;
     }
 
-    public getName() {
+    public String getName() {
         return name;
     }
 
-    public getOption0() {
+    public String getOption0() {
         return option0;
     }
 
-    public getOption1() {
+    public String getOption1() {
         return option1;
     }
 
+    @Override
     public String toString() {
         if (choice == 0){
             return outcome0;
