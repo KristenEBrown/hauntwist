@@ -1,10 +1,13 @@
 package edu.gatech.hauntwist;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class User {
 
+    private List<RoomItem> listItem;
 
     private MapTile currentTile;
     private MapTile leftTile;
@@ -16,7 +19,10 @@ public class User {
 
     private String name;
 
-    private ArrayList<RoomItem> items;
+    private Random rand;
+
+    private ArrayList<RoomItem> itemList;
+    private ArrayList<HallEvent> eventList;
 
     private static User currentUser;
 
@@ -24,8 +30,11 @@ public class User {
     public User(MapTile current, String name) {
         this.currentTile = current;
         this.name = name;
-        this.items = new ArrayList<RoomItem>();
+        this.itemList = new ArrayList<RoomItem>();
         this.dir = Direction.N;
+        itemList = new ArrayList<>();
+        eventList = new ArrayList<>();
+        rand = new Random();
         updateTiles(current);
     }
 
@@ -43,6 +52,34 @@ public class User {
 
     public Direction getDirection() {
         return this.dir;
+    }
+
+    public boolean hasItem() {
+        if (!(currentTile instanceof RoomTile)) {
+            return false;
+        }
+        return ((RoomTile)currentTile).hasItem();
+    }
+
+    public RoomItem getItem() {
+        RoomItem[] vals = RoomItem.values();
+        RoomItem nextItem = vals[itemList.size()];
+        itemList.add(nextItem);
+        return nextItem;
+    }
+
+    public boolean hasEvent() {
+        if (!(currentTile instanceof HallwayTile)) {
+            return false;
+        }
+        return ((HallwayTile)currentTile).hasEvent();
+    }
+
+    public HallEvent getEvent() {
+        HallEvent[] vals = HallEvent.values();
+        HallEvent nextEvent = vals[eventList.size()];
+        eventList.add(nextEvent);
+        return nextEvent;
     }
 
 

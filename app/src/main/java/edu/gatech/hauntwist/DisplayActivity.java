@@ -15,6 +15,9 @@ public class DisplayActivity extends AppCompatActivity {
     private Button rightButton;
     private Button turnButton;
 
+    private Button option1;
+    private Button option2;
+
     private View textBackground;
     private TextView msgText;
 
@@ -42,6 +45,8 @@ public class DisplayActivity extends AppCompatActivity {
 
         msgText.setText(test);
 
+        updateButtons();
+
 
 
 
@@ -53,12 +58,20 @@ public class DisplayActivity extends AppCompatActivity {
         rightButton = findViewById(R.id.rightBttn);
         turnButton = findViewById(R.id.turnBttn);
 
+        option1 = findViewById(R.id.option1Bttn);
+        option2 = findViewById(R.id.option2Bttn);
+        option1.setVisibility(View.INVISIBLE);
+        option2.setVisibility(View.INVISIBLE);
+
         textBackground = findViewById(R.id.textWrapper);
         msgText = findViewById(R.id.messageText);
 
         display = findViewById(R.id.displayView);
 
+<<<<<<< HEAD
         display
+=======
+>>>>>>> b8ebbbe9d009198ee0aa6c388bb3088baaa06567
 
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +105,7 @@ public class DisplayActivity extends AppCompatActivity {
             user.goForward();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
             msgText.setText(newMessage);
+            updateButtons();
         }
     }
 
@@ -101,6 +115,7 @@ public class DisplayActivity extends AppCompatActivity {
             user.goLeft();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
             msgText.setText(newMessage);
+            updateButtons();
         }
     }
 
@@ -110,6 +125,7 @@ public class DisplayActivity extends AppCompatActivity {
             user.goRight();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
             msgText.setText(newMessage);
+            updateButtons();
         }
     }
 
@@ -118,5 +134,12 @@ public class DisplayActivity extends AppCompatActivity {
         String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol())
                 + " dir: " + user.getDirection();
         msgText.setText(newMessage);
+        updateButtons();
+    }
+
+    public void updateButtons() {
+        forwardButton.setEnabled(user.canGoForward());
+        leftButton.setEnabled(user.canGoLeft());
+        rightButton.setEnabled(user.canGoRight());
     }
 }

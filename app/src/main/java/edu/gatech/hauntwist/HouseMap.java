@@ -27,6 +27,25 @@ public class HouseMap {
         hallwayList = new ArrayList<>();
         roomSet();
         hallSet();
+        RoomItem[] vals = RoomItem.values();
+        for(int i = 0; i < roomList.size(); i++) {
+            if (roomList.get(i).getEntrance() == null){
+                roomList.remove(roomList.get(i));
+            } else {
+                if (i < vals.length) {
+                    roomList.get(i).setHasItem(true);
+                }
+            }
+        }
+
+        HallEvent[] hallVals = HallEvent.values();
+        for(int i = 0; i < hallwayList.size(); i++) {
+            if (i < hallVals.length) {
+                hallwayList.get(i).get(rand.nextInt(
+                        hallwayList.get(i).size())).sethasEvent(true);
+            }
+        }
+
         Log.d("","");
         Log.d("DEBUG", "\n\n\n\n" + this.toString());
 

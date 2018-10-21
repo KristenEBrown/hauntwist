@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private TextView storyIntro;
     private EditText nameEntry;
     private Button enterButton;
 
@@ -29,6 +31,20 @@ public class SplashActivity extends AppCompatActivity {
         int nameAnimationDuration = 1000;
         int buttonAnimationDuration = 3000;
 
+        storyIntro = findViewById(R.id.storyTxt);
+        storyIntro.setText("Its dark... so dark you can hardly see. \n " +
+                "You blink hard, attempting \n" +
+                "to get your eyes to detect any glimmer \n" +
+                "of light from around you. After\n" +
+                "a few seconds of pitch black, you make out \n" +
+                "the dim outline of furniture.\n" +
+                " You seem so be in some sort of room. \n" +
+                "How did you get here? You try to remember, but\n" +
+                " strangely you have no memory\n" +
+                "of the situation that brought to such a \n" +
+                "mysterious place. In fact, the only thing \n" +
+                "that you can seem to recall at all is your \n" +
+                "own name... What is it?\n");
         nameEntry = findViewById(R.id.nameEditText);
         enterButton = findViewById(R.id.entryBttn);
 
