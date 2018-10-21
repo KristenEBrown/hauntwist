@@ -26,6 +26,7 @@ public class User {
         this.name = name;
         this.items = new ArrayList<RoomItem>();
         this.dir = Direction.N;
+        updateTiles(current);
     }
 
     public static void setCurrentUser(User newUser) {
