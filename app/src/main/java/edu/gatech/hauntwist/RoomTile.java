@@ -27,6 +27,10 @@ public class RoomTile extends MapTile{
         return super.getCol();
     }
 
+    public boolean isConnected() {
+        return this.entrance != null;
+    }
+
     @Override
     public String toString(){
         if (this.getEntrance() == null) {
