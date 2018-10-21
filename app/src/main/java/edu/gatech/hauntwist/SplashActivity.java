@@ -18,6 +18,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        createAttributes();
+
+
+
+    }
+
+    private void createAttributes() {
         int nameAnimationDuration = 1000;
         int buttonAnimationDuration = 3000;
 
@@ -43,10 +50,10 @@ public class SplashActivity extends AppCompatActivity {
             public void onClick(View v) {
                 enter();
             }});
-
     }
 
     private void enter() {
+
             startActivity(new Intent(SplashActivity.this, DisplayActivity.class));
         }
 

@@ -1,9 +1,11 @@
 package edu.gatech.hauntwist;
+
 public enum RoomItem {
     PHOTOGRAPH("","");
 
     private String name;
     private String clue;
+
     RoomItem(String name, String clue) {
         this.name = name;
         this.clue = clue;
