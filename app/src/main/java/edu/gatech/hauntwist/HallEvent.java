@@ -6,7 +6,7 @@ public enum HallEvent {
     MIRROR("You walk past a mirror hung on the wall.", "stop to look at yourself", "keep walking", "You walk towards the mirror, but you can't seem to see anything." +
             "It must be pretty dirty if you can't even see your reflection.", "You walk past the mirror and briefly notice you can't see your reflection." +
             "You must have just been walking too quickly to notice"),
-    DEADBODY("You walk past a dead body.", "expect the body", "step away from the body", "You come closer to the body and after closer inspection you " +
+    DEADBODY("You walk past a dead body.", "inspect the body", "step away from the body", "You come closer to the body and after closer inspection you " +
             "recognize the face. It is you! It's your body on the ground!", "You take a step back and step on something. It's a necklace. It looks like the necklace " +
             "that you wear everyday. It looks like it is broken! You look back over at the body and notice it wearing all of your clothes. It must be you!"),
     WHISPERING("You can hear Tom and Luke whispering", "listen to what they are saying","walk away", "You stay quiet and can hear the two's conversation." +

@@ -31,10 +31,11 @@ public class HouseMap {
         for(int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getEntrance() == null){
                 roomList.remove(roomList.get(i));
-            } else {
-                if (i < vals.length) {
-                    roomList.get(i).setHasItem(true);
-                }
+            }
+        }
+        for(int i = 0; i < roomList.size(); i++) {
+            if (i < vals.length) {
+                roomList.get(i).setHasItem(true);
             }
         }
 
@@ -46,8 +47,8 @@ public class HouseMap {
             }
         }
 
-        Log.d("","");
-        Log.d("DEBUG", "\n\n\n\n" + this.toString());
+        Log.d("D","");
+        Log.d("DEBUG",  "a \n" + this.toString());
 
     }
     //some sort of creation algo
