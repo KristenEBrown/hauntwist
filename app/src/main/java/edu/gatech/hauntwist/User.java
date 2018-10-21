@@ -65,6 +65,7 @@ public class User {
         RoomItem[] vals = RoomItem.values();
         RoomItem nextItem = vals[itemList.size()];
         itemList.add(nextItem);
+        ((RoomTile)currentTile).setHasItem(false);
         return nextItem;
     }
 
@@ -79,6 +80,7 @@ public class User {
         HallEvent[] vals = HallEvent.values();
         HallEvent nextEvent = vals[eventList.size()];
         eventList.add(nextEvent);
+        ((HallwayTile)currentTile).setHasEvent(false);
         return nextEvent;
     }
 
