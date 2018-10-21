@@ -27,7 +27,8 @@ public class HouseMap {
         hallwayList = new ArrayList<>();
         roomSet();
         hallSet();
-        Log.d("DEBUG", this.toString());
+        Log.d("","");
+        Log.d("DEBUG", "\n\n\n\n" + this.toString());
 
     }
     //some sort of creation algo
