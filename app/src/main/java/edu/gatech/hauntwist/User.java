@@ -41,6 +41,10 @@ public class User {
         return currentTile;
     }
 
+    public Direction getDirection() {
+        return this.dir;
+    }
+
 
     public void updateTiles(MapTile currentTile) {
         leftTile = tileUpdater(currentTile, "left");
@@ -53,12 +57,16 @@ public class User {
     public void turnAround() {
         if (dir == Direction.N) {
             this.dir = Direction.S;
+            this.updateTiles(currentTile);
         } else if (dir == Direction.S) {
             this.dir = Direction.N;
+            this.updateTiles(currentTile);
         } else if (dir == Direction.E) {
             this.dir = Direction.W;
+            this.updateTiles(currentTile);
         } else if (dir == Direction.W) {
             this.dir = Direction.E;
+            this.updateTiles(currentTile);
         }
     }
 
@@ -132,20 +140,20 @@ public class User {
     }
 
     private int getForCol() {
-        if (dir == Direction.N) {
-            return this.currentTile.getCol() - 1;
-        } else if (dir == Direction.S) {
+        if (dir == Direction.E) {
             return this.currentTile.getCol() + 1;
+        } else if (dir == Direction.W) {
+            return this.currentTile.getCol() - 1;
         } else {
             return this.currentTile.getCol();
         }
     }
 
     private int getForRow() {
-        if (dir == Direction.E) {
-            return this.currentTile.getRow() + 1;
-        } else if (dir == Direction.W) {
+        if (dir == Direction.N) {
             return this.currentTile.getRow() - 1;
+        } else if (dir == Direction.S) {
+            return this.currentTile.getRow() + 1;
         } else {
             return this.currentTile.getRow();
         }

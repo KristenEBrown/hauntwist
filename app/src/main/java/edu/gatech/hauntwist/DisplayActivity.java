@@ -13,6 +13,7 @@ public class DisplayActivity extends AppCompatActivity {
     private Button forwardButton;
     private Button leftButton;
     private Button rightButton;
+    private Button turnButton;
 
     private View textBackground;
     private TextView msgText;
@@ -50,6 +51,7 @@ public class DisplayActivity extends AppCompatActivity {
         forwardButton = findViewById(R.id.forwardBttn);
         leftButton = findViewById(R.id.leftBttn);
         rightButton = findViewById(R.id.rightBttn);
+        turnButton = findViewById(R.id.turnBttn);
 
         textBackground = findViewById(R.id.textWrapper);
         msgText = findViewById(R.id.messageText);
@@ -73,6 +75,13 @@ public class DisplayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 right();
             }});
+
+        turnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                turn();
+            }});
+
     }
 
     public void forward() {
@@ -89,7 +98,8 @@ public class DisplayActivity extends AppCompatActivity {
         if (user.canGoLeft()) {
             user.goLeft();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
-            msgText.setText(newMessage);        }
+            msgText.setText(newMessage);
+        }
     }
 
     public void right() {
@@ -97,6 +107,14 @@ public class DisplayActivity extends AppCompatActivity {
         if (user.canGoRight()) {
             user.goRight();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
-            msgText.setText(newMessage);        }
+            msgText.setText(newMessage);
+        }
+    }
+
+    public void turn() {
+        user.turnAround();
+        String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol())
+                + " dir: " + user.getDirection();
+        msgText.setText(newMessage);
     }
 }
