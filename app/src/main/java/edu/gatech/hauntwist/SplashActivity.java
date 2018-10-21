@@ -3,6 +3,7 @@ package edu.gatech.hauntwist;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,17 +55,21 @@ public class SplashActivity extends AppCompatActivity {
 
     private void enter() {
 
-
-
         HouseMap.setTheMap(new HouseMap());
+
         boolean locationChosen = false;
         int counter = 0;
         RoomTile start = null;
         while (!locationChosen) {
             RoomTile room = HouseMap.getTheMap().getRoomList().get(counter);
+            Log.d("DEBUG", "" + room.isConnected());
             if (room.isConnected()) {
                 start = room;
+                locationChosen = true;
+            } else {
+                counter++;
             }
+
         }
 
         User.setCurrentUser(new User(start, nameEntry.getText().toString()));

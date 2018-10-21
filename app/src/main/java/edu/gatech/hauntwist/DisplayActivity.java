@@ -77,18 +77,22 @@ public class DisplayActivity extends AppCompatActivity {
     public void forward() {
         if (user.canGoForward()) {
             user.goForward();
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);
         }
     }
 
     public void left() {
         if (user.canGoLeft()) {
             user.goLeft();
-        }
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);        }
     }
 
     public void right() {
         if (user.canGoRight()) {
             user.goRight();
-        }
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);        }
     }
 }
