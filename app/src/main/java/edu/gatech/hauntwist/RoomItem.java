@@ -1,4 +1,5 @@
 package edu.gatech.hauntwist;
+
 public enum RoomItem {
     PHOTOGRAPH("photograph", "You can see you and all of your friends smiling. You remember that this was taken during your trip for Fall Break. " +
             "Oddly enough you can't remember how that trip ended. It must have been a long time ago."),
