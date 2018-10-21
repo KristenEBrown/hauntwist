@@ -21,8 +21,7 @@ public class DisplayActivity extends AppCompatActivity {
     private View textBackground;
     private TextView msgText;
 
-    //private ImageView display;
-    private ImageView roomPic;
+    private ImageView display;
 
     private int ordinal = 0;
 
@@ -67,21 +66,7 @@ public class DisplayActivity extends AppCompatActivity {
         textBackground = findViewById(R.id.textWrapper);
         msgText = findViewById(R.id.messageText);
 
-        //display = findViewById(R.id.displayView);
-
-        roomPic = findViewById(R.id.roomImg);
-
-        if (user.getCurrentTile() instanceof RoomTile){
-            if (((RoomTile)user.getCurrentTile()).getType() == 0){
-                roomPic.setImageResource(R.drawable.room1);
-            } else if (((RoomTile)user.getCurrentTile()).getType() == 1){
-                roomPic.setImageResource(R.drawable.room2);
-            } else if (((RoomTile)user.getCurrentTile()).getType() == 2){
-                roomPic.setImageResource(R.drawable.room3);
-            }
-        } else {
-            roomPic.setImageResource(R.drawable.hallway1);
-        }
+        display = findViewById(R.id.displayView);
 
 
 
@@ -184,10 +169,18 @@ public class DisplayActivity extends AppCompatActivity {
             });
         }
 
-
-        if (user.getCurrentTile() instanceof HallwayTile) {
+        if (user.getCurrentTile() instanceof RoomTile){
+            if (((RoomTile)user.getCurrentTile()).getType() == 0){
+                display.setImageResource(R.drawable.room1);
+            } else if (((RoomTile)user.getCurrentTile()).getType() == 1){
+                display.setImageResource(R.drawable.room2);
+            } else if (((RoomTile)user.getCurrentTile()).getType() == 2){
+                display.setImageResource(R.drawable.room3);
+            }
+        } else if (user.getCurrentTile() instanceof HallwayTile) {
             display.setImageResource(R.drawable.hallway1);
         }
+
     }
 
     private void processDecision(HallEvent event, int choice) {
