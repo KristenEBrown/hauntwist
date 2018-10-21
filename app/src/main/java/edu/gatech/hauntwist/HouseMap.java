@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class HouseMap {
     private static MapTile[][] map;
+    private static HouseMap theMap;
     private int size;
     private Random rand;
     private List<RoomTile> roomList;
@@ -182,8 +183,18 @@ public class HouseMap {
         return hallway;
     }
 
-    public static MapTile[][] getMap() {
+    public static MapTile[][] getMapArray() {
         return map;
+    }
+    public static HouseMap getTheMap() {
+        return theMap;
+    }
+    public static void setTheMap(HouseMap newMap) {
+        map = newMap.map;
+    }
+
+    public List<RoomTile> getRoomList() {
+        return this.roomList;
     }
 
 

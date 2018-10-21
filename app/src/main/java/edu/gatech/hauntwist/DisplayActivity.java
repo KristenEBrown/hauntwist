@@ -18,6 +18,11 @@ public class DisplayActivity extends AppCompatActivity {
 
     private ImageView display;
 
+    private int ordinal = 0;
+
+    private User user = User.getCurrentUser();
+    private MapTile displayTile = user.getCurrentTile();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,12 @@ public class DisplayActivity extends AppCompatActivity {
 
         setAttributes();
 
-        String test = "You wake up in a dimly lit room. Looking around, " +
+
+
+        String test = "You're at " + displayTile.getRow() + displayTile.getCol()
+                + ". You wake up in a dimly lit room. Looking around, " +
                 "you see that the room is mostly empty, save for a few " +
-                "scattered items.";
+                "scattered items. Go forward.";
 
         msgText.setText(test);
 
@@ -46,5 +54,41 @@ public class DisplayActivity extends AppCompatActivity {
         msgText = findViewById(R.id.messageText);
 
         display = findViewById(R.id.displayView);
+
+        forwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forward();
+            }});
+
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                left();
+            }});
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                right();
+            }});
+    }
+
+    public void forward() {
+        if (user.canGoForward()) {
+            user.goForward();
+        }
+    }
+
+    public void left() {
+        if (user.canGoLeft()) {
+            user.goLeft();
+        }
+    }
+
+    public void right() {
+        if (user.canGoRight()) {
+            user.goRight();
+        }
     }
 }

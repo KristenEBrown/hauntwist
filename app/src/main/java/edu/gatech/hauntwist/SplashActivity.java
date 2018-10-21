@@ -54,7 +54,24 @@ public class SplashActivity extends AppCompatActivity {
 
     private void enter() {
 
-            startActivity(new Intent(SplashActivity.this, DisplayActivity.class));
+
+
+        HouseMap.setTheMap(new HouseMap());
+        boolean locationChosen = false;
+        int counter = 0;
+        RoomTile start = null;
+        while (!locationChosen) {
+            RoomTile room = HouseMap.getTheMap().getRoomList().get(counter);
+            if (room.isConnected()) {
+                start = room;
+            }
+        }
+
+        User.setCurrentUser(new User(start, nameEntry.getText().toString()));
+
+        startActivity(new Intent(SplashActivity.this, DisplayActivity.class));
+
+
         }
 
 }

@@ -18,12 +18,26 @@ public class User {
 
     private ArrayList<RoomItem> items;
 
+    private static User currentUser;
+
 
     public User(MapTile current, String name) {
         this.currentTile = current;
         this.name = name;
         this.items = new ArrayList<RoomItem>();
         this.dir = Direction.N;
+    }
+
+    public static void setCurrentUser(User newUser) {
+        currentUser = newUser;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public MapTile getCurrentTile() {
+        return currentTile;
     }
 
 
@@ -108,7 +122,7 @@ public class User {
     }
 
     private MapTile tileUpdaterHelper(MapTile currentTile, int newRow, int newCol) {
-        MapTile[][] tempMap = HouseMap.getMap();
+        MapTile[][] tempMap = HouseMap.getMapArray();
         try {
             return tempMap[newRow][newCol];
         } catch (ArrayIndexOutOfBoundsException e) {
