@@ -212,12 +212,12 @@ public class DisplayActivity extends AppCompatActivity {
             retStr += "hallway. ";
         }
 
-        retStr += "You can go to ";
+        retStr += "You can go ";
         if (user.canGoLeft()) {
-            retStr += "the left ";
+            retStr += "to the left ";
         }
         if (user.canGoRight()) {
-            retStr += "the right ";
+            retStr += "to the right ";
         }
         if (user.canGoForward()) {
             retStr += "forward. ";
