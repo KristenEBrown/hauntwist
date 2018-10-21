@@ -116,9 +116,7 @@ public class DisplayActivity extends AppCompatActivity {
         Log.d("MOVEMENT", "Can go forward: "+user.canGoForward());
         if (user.canGoForward()) {
             user.goForward();
-            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
-            msgText.setText(newMessage);
-            updateButtons();
+            update();
         }
     }
 
@@ -126,19 +124,15 @@ public class DisplayActivity extends AppCompatActivity {
         Log.d("MOVEMENT", "Can go left: "+user.canGoLeft());
         if (user.canGoLeft()) {
             user.goLeft();
-            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
-            msgText.setText(newMessage);
-            updateButtons();
+            update();
         }
     }
 
     public void right() {
-        Log.d("MOVEMENT", "Can go right: "+user.canGoLeft());
+        Log.d("MOVEMENT", "Can go right: " + user.canGoLeft());
         if (user.canGoRight()) {
             user.goRight();
-            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
-            msgText.setText(newMessage);
-            updateButtons();
+            update();
         }
     }
 
@@ -150,9 +144,95 @@ public class DisplayActivity extends AppCompatActivity {
         updateButtons();
     }
 
+    private void update() {
+        updateButtons();
+
+
+        String newMessage = tileInfoCreator();
+
+        if (user.hasItem()) {
+            newMessage = user.getItem().toString();
+        }
+
+        msgText.setText(newMessage);
+
+        if (user.hasEvent()) {
+            final HallEvent event = user.getEvent();
+            option1.setVisibility(View.VISIBLE);
+            option1.setText(event.getOption0());
+            option2.setVisibility(View.VISIBLE);
+            option2.setText(event.getOption1());
+            newMessage = event.getName();
+            msgText.setText(newMessage);
+
+            forwardButton.setEnabled(false);
+            leftButton.setEnabled(false);
+            rightButton.setEnabled(false);
+
+            option1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    processDecision(event,1);
+                }
+            });
+
+            option2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    processDecision(event, 2);
+                }
+            });
+        }
+
+
+        if (user.getCurrentTile() instanceof HallwayTile) {
+            display.setImageResource(R.drawable.hallway1);
+        }
+    }
+
+    private void processDecision(HallEvent event, int choice) {
+        if (choice == 1) {
+            msgText.setText(event.getOutcome0());
+        } else {
+            msgText.setText(event.getOutcome1());
+        }
+
+        option1.setVisibility(View.INVISIBLE);
+        option2.setVisibility(View.INVISIBLE);
+        forwardButton.setEnabled(user.canGoForward());
+        leftButton.setEnabled(user.canGoLeft());
+        rightButton.setEnabled(user.canGoRight());
+    }
+
     public void updateButtons() {
         forwardButton.setEnabled(user.canGoForward());
         leftButton.setEnabled(user.canGoLeft());
         rightButton.setEnabled(user.canGoRight());
+    }
+
+    public String tileInfoCreator() {
+        String retStr = "You are in a ";
+
+        if (user.getCurrentTile() instanceof RoomTile) {
+            retStr += "room. ";
+        } else {
+            retStr += "hallway. ";
+        }
+
+        retStr += "You can go to ";
+        if (user.canGoLeft()) {
+            retStr += "the left ";
+        }
+        if (user.canGoRight()) {
+            retStr += "the right ";
+        }
+        if (user.canGoForward()) {
+            retStr += "forward. ";
+        }
+
+        return retStr;
+
+
+
     }
 }

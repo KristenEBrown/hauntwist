@@ -44,6 +44,10 @@ public class RoomTile extends MapTile{
     public boolean hasItem() { return hasItem; }
     public void setHasItem(boolean b) { hasItem = b; }
 
+    public RoomItem getItem() {
+        return this.item;
+    }
+
     @Override
     public String toString(){
         if (this.getEntrance() == null) {

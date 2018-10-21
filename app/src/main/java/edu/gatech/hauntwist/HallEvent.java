@@ -57,6 +57,14 @@ public enum HallEvent {
         return option1;
     }
 
+    public String getOutcome0() {
+        return outcome0;
+    }
+
+    public String getOutcome1() {
+        return outcome1;
+    }
+
     @Override
     public String toString() {
         if (choice == 0){
