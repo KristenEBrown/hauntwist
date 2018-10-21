@@ -17,8 +17,8 @@ public class HallwayTile extends MapTile {
         return super.getCol();
     }
 
-    public boolean hasEvent(){ return hasEvent; }
-    public void sethasEvent(boolean b){ hasEvent = b; }
+    public boolean hasEvent() { return hasEvent; }
+    public void setHasEvent(boolean b) { hasEvent = b; }
 
     @Override
     public String toString(){
