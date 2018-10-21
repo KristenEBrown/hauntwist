@@ -85,7 +85,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void left() {
-        Log.d("MOVEMENT", "Can go left: "+user.canGoForward());
+        Log.d("MOVEMENT", "Can go left: "+user.canGoLeft());
         if (user.canGoLeft()) {
             user.goLeft();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
@@ -93,7 +93,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void right() {
-        Log.d("MOVEMENT", "Can go right: "+user.canGoForward());
+        Log.d("MOVEMENT", "Can go right: "+user.canGoLeft());
         if (user.canGoRight()) {
             user.goRight();
             String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
