@@ -46,7 +46,9 @@ public class HouseMap {
     }
 
     public void hallSet(){
+        // System.out.println(roomList.get(0).getRow() + ":" + roomList.get(0).getCol());
         HallwayTile h = this.getStart(0);
+        // System.out.println(h.getRow() + ":" + h.getCol());
         int hallways = 1;
         while(hallways <= size){
             HallwayManager horzHallway = moveHorizontal(h.getRow(), h.getCol());
@@ -66,13 +68,17 @@ public class HouseMap {
         int col = roomList.get(index).getCol();
         int row = roomList.get(index).getRow();
         if (col + 1 < size && map[row][col + 1] == null) {
-            return new HallwayTile(row, col + 1);
+            HallwayTile h = new HallwayTile(row, col + 1);
+            return h;
         } else if (col - 1 >= 0 && map[row][col - 1] == null) {
-            return new HallwayTile(row, col - 1);
+            HallwayTile h = new HallwayTile(row, col - 1);
+            return h;
         } else if (row + 1 < size && map[row + 1][col] == null) {
-            return new HallwayTile(row + 1, col);
+            HallwayTile h = new HallwayTile(row + 1, col);
+            return h;
         } else if (row - 1 >= 0 && map[row - 1][col] == null) {
-            return new HallwayTile(row - 1, col);
+            HallwayTile h = new HallwayTile(row - 1, col);
+            return h;
         }
         return getStart(index + 1);
     }
@@ -82,11 +88,11 @@ public class HouseMap {
         int col = hall.getConnector().getCol();
         if (col < 0 || col > size - 1
                 || row < 0 || row > size - 1
-                    || map[row][col] != null){
+                    || map[row][col] instanceof RoomTile){
             if (hall.getEnd() != null) {
                 return hall.getEnd();
             } else {
-                return getNextOpen(hallwayList.get(hallwayList.lastIndexOf(hall) - 1));
+                return hallwayList.get(rand.nextInt(hallwayList.size())).getEnd();
             }
         }
         return hall.getConnector();
@@ -107,6 +113,7 @@ public class HouseMap {
             if (!(map[row][col] instanceof RoomTile)) {
                 HallwayTile h = new HallwayTile(row, col);
                 hallway.add(h);
+                //System.out.println(this);
                 map[row][col] = h;
                 if (row > 0) {
                     a = check(row - 1, col, h);
@@ -135,6 +142,7 @@ public class HouseMap {
                 r.setEntrance(h);
                 return true;
             }
+            r.setEntrance(h);
             return false;
         }
         return false;
@@ -192,11 +200,12 @@ public class HouseMap {
                 if (map[i][j] != null) {
                     toRet += String.format("%-3s", map[i][j].toString());
                 } else {
-                    toRet += String.format("%-3s", "•");
+                    toRet += String.format("%-3s", " ");
                 }
             }
             toRet += "\n";
         }
+        toRet += "\n \n \n";
         return toRet;
     }
 

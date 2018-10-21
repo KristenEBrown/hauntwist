@@ -23,9 +23,15 @@ public class HallwayManager {
         if (!(hall.isEmpty())){
             return hall.get(hall.size() - 1);
         }
-
         return null;
+    }
 
+    public HallwayTile get(int index){
+        return hall.get(index);
+    }
+
+    public int size(){
+        return hall.size();
     }
 
     public void setConnector(HallwayTile h){
