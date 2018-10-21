@@ -1,5 +1,7 @@
 package edu.gatech.hauntwist;
 
+import android.util.Log;
+
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 public class HouseMap {
     private static MapTile[][] map;
     private static HouseMap theMap;
+
     private int size;
     private Random rand;
     private List<RoomTile> roomList;
@@ -24,6 +27,7 @@ public class HouseMap {
         hallwayList = new ArrayList<>();
         roomSet();
         hallSet();
+        Log.d("DEBUG", this.toString());
 
     }
     //some sort of creation algo
@@ -191,6 +195,7 @@ public class HouseMap {
     }
     public static void setTheMap(HouseMap newMap) {
         map = newMap.map;
+        theMap = newMap;
     }
 
     public List<RoomTile> getRoomList() {

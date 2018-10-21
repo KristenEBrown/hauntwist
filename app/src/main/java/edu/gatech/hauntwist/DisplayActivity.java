@@ -2,6 +2,7 @@ package edu.gatech.hauntwist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -75,20 +76,27 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     public void forward() {
+        Log.d("MOVEMENT", "Can go forward: "+user.canGoForward());
         if (user.canGoForward()) {
             user.goForward();
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);
         }
     }
 
     public void left() {
+        Log.d("MOVEMENT", "Can go left: "+user.canGoLeft());
         if (user.canGoLeft()) {
             user.goLeft();
-        }
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);        }
     }
 
     public void right() {
+        Log.d("MOVEMENT", "Can go right: "+user.canGoLeft());
         if (user.canGoRight()) {
             user.goRight();
-        }
+            String newMessage = Integer.toString(user.getCurrentTile().getRow()) + Integer.toString(user.getCurrentTile().getCol());
+            msgText.setText(newMessage);        }
     }
 }
